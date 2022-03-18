@@ -10,11 +10,35 @@ public class Score {
 	static PrintWriter lapiz;
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		DeterminarMayorVentaja(); 
+		//DeterminarMayorVentaja(); 
+		NuevosScores();
       }
 	
+	public static void NuevosScores() throws FileNotFoundException {
+		Scanner entrada = new Scanner(System.in);
+		Escribir("TextoEntrada.txt");
+		
+		String a,b,res;
+		do
+        {
+			System.out.println("Ingresa el puntaje del jugador 1: ");
+			a = entrada.nextLine();
+			System.out.println("Ingresa el puntaje del jugador 2: ");
+			b = entrada.nextLine();
+			
+			lapiz.println(a+" "+b);
+			System.out.println("Otro Puntaje S/N?");
+			res = entrada.nextLine();
+        }
+        while (res.equalsIgnoreCase("s"));
+        	
+			lapiz.close();
+			DeterminarMayorVentaja();
+		
+	}
+	
 	public static Scanner Leer() throws FileNotFoundException {
-		File entrada = new File("C:\\Users\\kalak\\Desktop\\texto.txt");
+		File entrada = new File("TextoEntrada.txt");
 		obj = new Scanner(entrada);
 		 return obj;
 	}
@@ -22,7 +46,7 @@ public class Score {
 	public static void DeterminarMayorVentaja() throws FileNotFoundException {
 		String ronda;
 		Leer();
-		Escribir();
+		Escribir("textoSalida.txt");
 		 while (obj.hasNextLine()) {
 		       	ronda = obj.nextLine();
 		        String[] scores = ronda.split("\\s+");
@@ -44,9 +68,9 @@ public class Score {
 		 		   lapiz.close();
 	}
 	
-	public static PrintWriter Escribir() {
+	public static PrintWriter Escribir(String nombreArchivo) {
 		try {
-            lapiz = new PrintWriter("C:\\Users\\kalak\\Desktop\\textoSalida.txt", "UTF-8");
+            lapiz = new PrintWriter(nombreArchivo, "UTF-8");
         } catch (Exception e) {
             e.printStackTrace();
         }
